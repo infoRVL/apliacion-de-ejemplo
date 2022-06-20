@@ -1,50 +1,176 @@
-# apliacion-de-ejemplo
-elaborar un codigo 
+# apliacion-de-ejemplo/*
+velazquez lopez ilmer alexander
+perez montesinos andreina 
+ */
 using System;
-using System.IO;
-/*ilmer alexander velazquez lopez 20887002
- andreina perez montesinos 20887031
- emmanuel de jesus mendoza cruz 20887021*/
-using System;
+using System.Threading;
+using System.Collections.Generic;
 
-namespace aplicacion_codigo_ilmer
-{
+using System.IO;
+
+
     class Program
     {
-
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            //Pedimos nombre del Archivo
-            Console.WriteLine("Ingrese Nombre del Archivo");
-            String Arc = Console.ReadLine();
+            int tiempo = 1000;
 
-            //Abrimos o Creamos un Archivo si no existe.
-            Stream Archivo = new FileStream("./" + Arc + ".txt", FileMode.OpenOrCreate);
+            double[] numeros = new double[5];
 
-            //Esbribimos en nuestro Archivo mediante StramWrite
-            StreamWriter Escribir = new StreamWriter(Archivo);
 
-            Console.WriteLine("Ingres texto para escribir en: " + Arc + ".txt");
-            String Texto = Console.ReadLine();
 
-            Escribir.WriteLine(Texto);
+            bool salir = false;
 
-            //Cerramos
-            Escribir.Close();
-            Archivo.Close();
+            while (!salir)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("1. Ingresar los numeros");
+                Console.WriteLine("2. Mostrar los numeros");
+                Console.WriteLine("3. Ordenar los numeros");
+                Console.WriteLine("4. salir");
+                Console.WriteLine("5. Guardar");
+                Console.WriteLine("6. nombre de los integrantes");
+                Console.WriteLine("Elige una de las opciones");
+                Console.WriteLine("");
+                Console.WriteLine("__________________________");
 
-            //Abrimos o Creamos un Archivo si no existe.
-            Stream Archivo2 = new FileStream("./" + Arc + ".txt", FileMode.OpenOrCreate);
-            Console.WriteLine("\nLectura:\n");
 
-            //Leemos nuestro archivo mediante StreamReader
-            StreamReader Leer = new StreamReader(Archivo2);
-            Console.WriteLine(Leer.ReadToEnd());
+                int opcion = Convert.ToInt32(Console.ReadLine());
 
-            //Cerramos
-            Leer.Close();
-            Archivo2.Close();
+                switch (opcion)
 
+                {
+
+                    case 1:
+
+
+                        //pedimos al usuario los 5 valores
+                        for (int i = 0; i < 5; i++)
+                        {
+                            Console.WriteLine("Ingrese un valor:");
+
+                            numeros[i] = double.Parse(Console.ReadLine());
+
+                        }
+                        break;
+
+
+                    case 2:
+
+
+
+
+
+                        Stream Archivo1 = new FileStream("Archivo.txt", FileMode.OpenOrCreate);
+                        StreamReader Leer = new StreamReader(Archivo1);
+                        Console.WriteLine(Leer.ReadToEnd());
+
+                        Leer.Close();
+                        Archivo1.Close();
+
+
+
+
+                        Thread.Sleep(tiempo);
+
+
+
+
+                        break
+                        ;
+
+                    case 3:
+                        Console.WriteLine("Sub menu");
+
+                        while (!salir)
+                        {
+
+                            Console.WriteLine("1. Ordenar de menor a mayor");
+                            Console.WriteLine("2. Ordenar de mayor a menor");
+
+                            int nueva = Convert.ToInt32(Console.ReadLine());
+                            switch (nueva)
+                            {
+                                case 1:
+
+
+                                    Array.Sort(numeros);
+
+                                    Console.WriteLine("\nLos números ordenados de menor a mayor son:");
+
+                                    for (int i = 0; i < 5; i++)
+                                    {
+                                        Console.WriteLine(numeros[i]);
+                                        Thread.Sleep(tiempo);
+
+                                    }
+
+
+                                    break;
+
+
+
+                                case 2:
+                                    Array.Reverse(numeros);
+                                    Console.WriteLine("\nLos números ordenados de mayor a menor son:");
+
+                                    for (int i = 0; i < 5; i++)
+                                    {
+                                        Console.WriteLine(numeros[i]);
+                                        Thread.Sleep(tiempo);
+
+                                    }
+                                    break;
+
+
+
+
+
+                            }
+                            break;
+                        }
+                        break;
+                    case 4:
+                        Console.WriteLine("Has elegido salir de la aplicación");
+                        salir = true;
+                        break;
+
+                    case 5:
+                        Stream Archivo2 = new FileStream("Archivo.txt", FileMode.OpenOrCreate);
+                        StreamWriter Escribir = new StreamWriter(Archivo2);
+                        for (int i = 0; i < 5; i++)
+                        {
+                            Escribir.WriteLine(numeros[i]);
+                        }
+
+                        Escribir.Close();
+                        Archivo2.Close();
+
+
+                        break;
+
+                    default:
+                        Console.WriteLine("Elige una opcion entre 1 y 4");
+                        break;
+
+                    case 6:
+                    Console.WriteLine("VELAZQUEZ LOPEZ ILMER ALEXANDER");
+                    Console.WriteLine("PEREZ MONTESINOS ANDREINA");
+
+                    break;
+
+
+                }
+            }
+
+
+            {
+
+
+
+
+                Console.ReadKey();
+            }
         }
     }
-}
+
